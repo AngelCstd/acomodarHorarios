@@ -29,6 +29,7 @@ export class Handler {
     }
 
     private crearConjuntosClases(indices: number[], clases: Curso[]): void {
+        if(this.semanas.length < 20){
         if (indices.length < this.materias.length) {
             this.materias.forEach((materia, index) => {
                 if (indices.includes(index)) {
@@ -48,6 +49,7 @@ export class Handler {
                 }
             }
         }
+    }
     }
     private isDuplicate(semana: Semana): boolean {
         let resultado = this.semanas.map(currentSemana =>this.isDuplicateWeek(currentSemana, semana))

@@ -25,23 +25,25 @@ export class Handler {
         return respuesta;
     }
     crearConjuntosClases(indices, clases) {
-        if (indices.length < this.materias.length) {
-            this.materias.forEach((materia, index) => {
-                if (indices.includes(index)) {
-                    return;
-                }
-                materia.forEach(clase => {
-                    if (this.revisarConflicto(clase, clases))
+        if (this.semanas.length < 20) {
+            if (indices.length < this.materias.length) {
+                this.materias.forEach((materia, index) => {
+                    if (indices.includes(index)) {
                         return;
-                    this.crearConjuntosClases([...indices, index], [...clases, clase]);
+                    }
+                    materia.forEach(clase => {
+                        if (this.revisarConflicto(clase, clases))
+                            return;
+                        this.crearConjuntosClases([...indices, index], [...clases, clase]);
+                    });
                 });
-            });
-        }
-        else {
-            if (clases.length > this.materias.length / 2) {
-                let semana = new Semana(clases);
-                if (!this.isDuplicate(semana)) {
-                    this.semanas.push(semana);
+            }
+            else {
+                if (clases.length > this.materias.length / 2) {
+                    let semana = new Semana(clases);
+                    if (!this.isDuplicate(semana)) {
+                        this.semanas.push(semana);
+                    }
                 }
             }
         }
