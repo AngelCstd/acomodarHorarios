@@ -12,10 +12,10 @@ export class Handler {
                 var _a;
                 (_a = clase.horarios) === null || _a === void 0 ? void 0 : _a.forEach(horario => {
                     if (horario.dia == currentHorario.dia) {
-                        if ((currentHorario.horaInicio <= horario.horaInicio
-                            && currentHorario.horaFinal > horario.horaInicio)
-                            || (currentHorario.horaInicio < horario.horaFinal
-                                && currentHorario.horaFinal > horario.horaFinal)) {
+                        if ((currentHorario.horaInicio * 100 <= horario.horaInicio * 100
+                            && currentHorario.horaFinal * 100 > horario.horaInicio * 100)
+                            || (currentHorario.horaInicio * 100 < horario.horaFinal * 100
+                                && currentHorario.horaFinal * 100 > horario.horaFinal * 100)) {
                             respuesta = true;
                         }
                     }
@@ -25,27 +25,25 @@ export class Handler {
         return respuesta;
     }
     crearConjuntosClases(indices, clases) {
-        if (this.semanas.length < 20) {
-            if (indices.length < this.materias.length) {
-                this.materias.forEach((materia, index) => {
-                    if (indices.includes(index)) {
-                        return;
-                    }
-                    materia.forEach(clase => {
-                        if (this.revisarConflicto(clase, clases))
-                            return;
-                        this.crearConjuntosClases([...indices, index], [...clases, clase]);
-                    });
-                });
+        if (this.semanas.length > 25)
+            return;
+        if (indices.length >= this.materias.length) { //*5/7 || (this.materias.length < 4 && indices.length >= 1)
+            let semana = new Semana(clases);
+            if (!this.isDuplicate(semana)) {
+                this.semanas.push(semana);
             }
-            else {
-                if (clases.length > this.materias.length / 2) {
-                    let semana = new Semana(clases);
-                    if (!this.isDuplicate(semana)) {
-                        this.semanas.push(semana);
-                    }
+        }
+        else {
+            this.materias.forEach((materia, index) => {
+                if (indices.includes(index)) {
+                    return;
                 }
-            }
+                materia.forEach(clase => {
+                    if (this.revisarConflicto(clase, clases))
+                        this.crearConjuntosClases([...indices, index], [...clases]);
+                    this.crearConjuntosClases([...indices, index], [...clases, clase]);
+                });
+            });
         }
     }
     isDuplicate(semana) {

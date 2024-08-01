@@ -35,6 +35,8 @@ export class Formulario {
         container.appendChild(form);
         // Agregar el contenedor al DOM
         (_a = document.getElementById('app')) === null || _a === void 0 ? void 0 : _a.appendChild(container);
+        //Enfocar el input
+        input.focus();
         // Añadir el evento de envío al formulario
         form.addEventListener('submit', (event) => { this.handleSubmit(event, input.value); });
     }

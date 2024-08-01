@@ -75,6 +75,8 @@ export class FormularioCurso {
 
         this.container.appendChild(form)
 
+        input_profesor.focus()
+
         form.addEventListener("submit", event => { this.handleSubmit(event) })
     }
 

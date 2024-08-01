@@ -59,6 +59,7 @@ export class FormularioCurso {
         submit.textContent = "Confirmar";
         form.appendChild(submit);
         this.container.appendChild(form);
+        input_profesor.focus();
         form.addEventListener("submit", event => { this.handleSubmit(event); });
     }
     crearSelect(id, opciones, labelName) {

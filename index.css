@@ -17,7 +17,7 @@
 
 body {
     position: relative;
-    min-height: 100vh;
+    min-height: 100dvh;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,8 @@ body {
 main {
     padding: 1rem;
     flex: 1;
+    width: 100vw;
+    overflow: auto;
 }
 
 /*Botones de inicio*/
@@ -192,7 +194,9 @@ select:focus {
 
 
 /*tablas*/
-.schedule-table-container {
+section.schedule-table-container {
+    width: 100%;
+    overflow: scroll;
     padding: 1rem;
     border: 1px solid red;
 }
