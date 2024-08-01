@@ -29,7 +29,7 @@ export class Handler {
     }
 
     private crearConjuntosClases(indices: number[], clases: Curso[]): void {
-        if (this.semanas.length > 25) return
+        if (this.semanas.length > 35) return
         if (indices.length >= this.materias.length) {//*5/7 || (this.materias.length < 4 && indices.length >= 1)
             let semana = new Semana(clases)
             if (!this.isDuplicate(semana)) {

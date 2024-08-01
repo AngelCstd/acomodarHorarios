@@ -25,7 +25,7 @@ export class Handler {
         return respuesta;
     }
     crearConjuntosClases(indices, clases) {
-        if (this.semanas.length > 25)
+        if (this.semanas.length > 35)
             return;
         if (indices.length >= this.materias.length) { //*5/7 || (this.materias.length < 4 && indices.length >= 1)
             let semana = new Semana(clases);
